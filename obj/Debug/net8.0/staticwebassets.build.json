@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "6YNYYGD9Udd2tq/TeuaNNrh2hR2K7o9iSJ+M1MJ0xw4=",
+  "Source": "GestionBibliothequeAPI",
+  "BasePath": "_content/GestionBibliothequeAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "GestionBibliothequeAPI\\wwwroot",
+      "Source": "GestionBibliothequeAPI",
+      "ContentRoot": "C:\\Users\\Mahfu\\GestionBibliothequeAPI\\wwwroot\\",
+      "BasePath": "_content/GestionBibliothequeAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Mahfu\\GestionBibliothequeAPI\\wwwroot\\index.html",
+      "SourceId": "GestionBibliothequeAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Mahfu\\GestionBibliothequeAPI\\wwwroot\\",
+      "BasePath": "_content/GestionBibliothequeAPI",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
+}

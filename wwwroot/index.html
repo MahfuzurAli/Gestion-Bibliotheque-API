@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion Bibliothèque API</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .form-container {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="number"], input[type="date"] {
+            padding: 5px;
+            margin: 5px 0;
+            width: 100%;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test des fonctions - Gestion Bibliothèque</h1>
+
+    <!-- Ajouter un livre -->
+    <div class="form-container">
+        <h2>Ajouter un livre</h2>
+        <form id="addBookForm">
+            <label for="bookTitle">Titre</label>
+            <input type="text" id="bookTitle" required><br>
+            <label for="bookIsbn">ISBN</label>
+            <input type="text" id="bookIsbn" required><br>
+            <label for="bookPublishedDate">Date de publication</label>
+            <input type="date" id="bookPublishedDate" required><br>
+            <label for="bookAuthorId">Auteur ID</label>
+            <input type="number" id="bookAuthorId" required><br>
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
+
+    <!-- Supprimer un livre -->
+    <div class="form-container">
+        <h2>Supprimer un livre</h2>
+        <form id="deleteBookForm">
+            <label for="deleteBookId">ID du livre</label>
+            <input type="number" id="deleteBookId" required><br>
+            <button type="submit">Supprimer</button>
+        </form>
+    </div>
+
+    <!-- Ajouteur un auteur -->
+    <div class="form-container">
+        <h2>Ajouter un auteur</h2>
+        <form id="addAuthorForm">
+            <label for="authorFirstName">Prénom</label>
+            <input type="text" id="authorFirstName" required><br>
+            <label for="authorLastName">Nom</label>
+            <input type="text" id="authorLastName" required><br>
+            <label for="authorDob">Date de naissance</label>
+            <input type="date" id="authorDob" required><br>
+            <button type="submit">Ajouter</button>
+        </form>
+    </div>
+
+    <!-- Supprimer un auteur -->
+    <div class="form-container">
+        <h2>Supprimer un auteur</h2>
+        <form id="deleteAuthorForm">
+            <label for="deleteAuthorId">ID de l'auteur</label>
+            <input type="number" id="deleteAuthorId" required><br>
+            <button type="submit">Supprimer</button>
+        </form>
+    </div>
+
+    <script>
+        const apiBaseUrl = "http://localhost:5204/api";
+
+        // Ajouter un livre [POST]
+        document.getElementById("addBookForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const title = document.getElementById("bookTitle").value;
+            const isbn = document.getElementById("bookIsbn").value;
+            const publishedDate = document.getElementById("bookPublishedDate").value;
+            const authorId = document.getElementById("bookAuthorId").value;
+
+            const bookData = { title, isbn, publishedDate, auteurId: authorId };
+            
+            const response = await fetch(`${apiBaseUrl}/LivresControlleur`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(bookData)
+            });
+
+            if (response.ok) {
+                alert("Livre ajouté!");
+            } else {
+                alert("Erreur lors de l'ajout du livre.");
+            }
+        });
+
+        // Supprimer un livre [DELETE]
+        document.getElementById("deleteBookForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const bookId = document.getElementById("deleteBookId").value;
+
+            const response = await fetch(`${apiBaseUrl}/LivresControlleur/${bookId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert("Livre supprimé!");
+            } else {
+                alert("Erreur lors de la suppression du livre.");
+            }
+        });
+
+        // Ajouter un auteur [POST]
+        document.getElementById("addAuthorForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const firstName = document.getElementById("authorFirstName").value;
+            const lastName = document.getElementById("authorLastName").value;
+            const dob = document.getElementById("authorDob").value;
+
+            const authorData = { prenom: firstName, nom: lastName, dateNaissance: dob };
+            
+            const response = await fetch(`${apiBaseUrl}/AuteursControlleur`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(authorData)
+            });
+
+            if (response.ok) {
+                alert("Auteur ajouté!");
+            } else {
+                alert("Erreur lors de l'ajout de l'auteur.");
+            }
+        });
+
+        // Supprimer un auteur [DELETE]
+        document.getElementById("deleteAuthorForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+            const authorId = document.getElementById("deleteAuthorId").value;
+
+            const response = await fetch(`${apiBaseUrl}/AuteursControlleur/${authorId}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                alert("Auteur supprimé!");
+            } else {
+                alert("Erreur lors de la suppression de l'auteur.");
+            }
+        });
+    </script>
+</body>
+</html>
